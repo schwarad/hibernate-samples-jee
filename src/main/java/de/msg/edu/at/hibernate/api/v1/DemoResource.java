@@ -27,20 +27,32 @@ public class DemoResource {
        return Response.ok(demoBusiness.save(demoEntity)).build();
     }
 
+    @PUT
+    public Response update(DemoEntity demoEntity) {
+        DemoEntity updated = demoBusiness.update(demoEntity);
+        if (updated == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(updated).build();
+    }
+
     @GET
     @Path("/{id}")
     public Response get(@PathParam("id") String uuid) {
-        DemoEntity demoEntity = demoBusiness.get(UUID.fromString(uuid));
-        if (demoEntity == null) {
+        DemoEntity entity = demoBusiness.get(UUID.fromString(uuid));
+        if (entity == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(demoEntity).build();
+        return Response.ok(entity).build();
     }
 
     @DELETE
     @Path("/{id}")
     public Response delete(@PathParam("id") String uuid) {
-        demoBusiness.delete(UUID.fromString(uuid));
-        return Response.noContent().build();
+        boolean hasBeeenDeleted = demoBusiness.delete(UUID.fromString(uuid));
+        if (hasBeeenDeleted) {
+            return Response.noContent().build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 }

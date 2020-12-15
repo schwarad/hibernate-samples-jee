@@ -24,7 +24,20 @@ public class DemoEntityDao {
         return entity;
     }
 
-    public void delete(UUID id) {
-        em.remove(id);
+    public DemoEntity update(DemoEntity entity) {
+        return exists(entity.getId()) ? em.merge(entity) : null;
+    }
+
+    private boolean exists(UUID id) {
+        return em.find(DemoEntity.class, id) != null;
+    }
+
+    public boolean delete(UUID id) {
+        DemoEntity demoEntity = em.find(DemoEntity.class, id);
+        if (demoEntity != null) {
+            em.remove(demoEntity);
+            return true;
+        }
+        return false;
     }
 }

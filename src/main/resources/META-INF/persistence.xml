@@ -6,26 +6,12 @@
     <persistence-unit name="demo" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>java:/jdbc/demo</jta-data-source>
-        <class>de.msg.edu.at.hibernate.persistence.entities.DemoEntity</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
-            <!--property name="javax.persistence.jdbc.driver"
-                      value="org.postgresql.Driver" />
-
-            <property name="javax.persistence.jdbc.url"
-                      value="jdbc:postgresql://localhost:5433/postgres" />
-
-            <property name="javax.persistence.jdbc.user"
-                      value="pgadmin" />
-
-            <property name="javax.persistence.jdbc.password"
-                      value="pgadmin" /-->
-
             <property name="hibernate.show_sql"
                       value="true" />
-
             <property name="hibernate.hbm2ddl.auto"
-                      value="create" />
+                      value="create-drop" />
         </properties>
     </persistence-unit>
 </persistence>

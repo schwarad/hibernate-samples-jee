@@ -24,7 +24,11 @@ public class DemoBusiness {
         return demoEntityDao.save(demoEntity);
     }
 
-    public void delete(UUID id) {
-        demoEntityDao.delete(id);
+    public DemoEntity update(DemoEntity demoEntity) {
+        return  demoEntityDao.update(demoEntity);
+    }
+
+    public boolean delete(UUID id) {
+        return demoEntityDao.delete(id);
     }
 }
